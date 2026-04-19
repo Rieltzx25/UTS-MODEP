@@ -6,7 +6,6 @@ import joblib
 import numpy as np
 import pandas as pd
 import streamlit as st
-import matplotlib.pyplot as plt
 
 
 st.set_page_config(page_title="Placement Predictor", page_icon="🎓", layout="wide")
@@ -124,53 +123,36 @@ if submitted:
     st.markdown("---")
     st.subheader("Hasil Prediksi")
 
-    col1, col2 = st.columns([1, 1])
+    placed_idx = classes.index("Placed")
+    prob_placed = float(proba[placed_idx])
+
+    col1, col2, col3 = st.columns(3)
 
     with col1:
         if pred == "Placed":
-            st.success(f"### ✅ {pred}")
+            st.success(f"**Status:** {pred}")
         else:
-            st.error(f"### ❌ {pred}")
-
-        st.markdown("**Confidence:**")
-        fig, ax = plt.subplots(figsize=(5, 2))
-        colors = ["#DD8452" if c == "Not Placed" else "#4C72B0" for c in classes]
-        ax.barh(classes, proba, color=colors)
-        for i, p in enumerate(proba):
-            ax.text(p + 0.02, i, f"{p:.2%}", va="center")
-        ax.set_xlim(0, 1.15)
-        ax.set_xlabel("Probability")
-        plt.tight_layout()
-        st.pyplot(fig)
+            st.error(f"**Status:** {pred}")
 
     with col2:
+        st.metric("Probability (Placed)", f"{prob_placed:.2%}")
+
+    with col3:
         if pred == "Placed":
-            salary = float(reg.predict(X)[0])
-            salary = max(0.0, salary)
-
-            st.markdown("**Estimasi Gaji**")
-            fig, ax = plt.subplots(figsize=(5, 2.5))
-            ax.barh([0], [salary], color="#55A868", height=0.4)
-            ax.barh([0], [20], color="#E0E0E0", height=0.4, alpha=0.3, zorder=0)
-            ax.text(salary + 0.3, 0, f"{salary:.2f} LPA",
-                    va="center", fontsize=14, fontweight="bold")
-            ax.set_xlim(0, 22)
-            ax.set_yticks([])
-            ax.set_xlabel("Salary (LPA)")
-            ax.set_title(f"Predicted Salary")
-            plt.tight_layout()
-            st.pyplot(fig)
-
-            st.info(
-                "💡 Rentang gaji di dataset training: **5.2 – 20.0 LPA** "
-                "(median ~16.4 LPA untuk siswa Placed)."
-            )
+            salary = max(0.0, float(reg.predict(X)[0]))
+            st.metric("Estimasi Gaji", f"{salary:.2f} LPA")
         else:
-            st.warning(
-                "🔒 Regresi gaji tidak dijalankan karena status prediksinya *Not Placed*. "
-                "Ini by design: regressor hanya dilatih di subset Placed supaya tidak "
-                "terkontaminasi structural zero."
-            )
+            st.metric("Estimasi Gaji", "—")
+
+    if pred == "Placed":
+        st.caption(
+            "Rentang gaji di dataset training: 5.2 – 20.0 LPA (median ~16.4 LPA)."
+        )
+    else:
+        st.caption(
+            "Regresi gaji tidak dijalankan karena status prediksinya Not Placed "
+            "(regressor hanya dilatih di subset Placed)."
+        )
 
     with st.expander("🔍 Detail Input"):
         st.dataframe(X.T.rename(columns={0: "value"}))
