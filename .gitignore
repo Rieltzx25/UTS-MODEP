@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.ipynb_checkpoints/
+
+# MLflow (lokal, di-regenerate saat run)
+mlflow.db
+mlruns/
+
+# Part 1 artifacts (obsolete — sekarang pakai MLflow registry)
+artifacts/
+
+# Env / editor
+.venv/
+.env
+.vscode/
+.idea/
