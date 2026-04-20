@@ -13,7 +13,6 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel, Field
 
 
-# -- Schemas --------------------------------------------------------------
 class StudentInput(BaseModel):
     cgpa: float = Field(..., ge=0.0, le=10.0, examples=[8.5])
     tenth_percentage: float = Field(..., ge=0.0, le=100.0, examples=[85.0])
@@ -49,7 +48,6 @@ class PredictionOutput(BaseModel):
     note: str
 
 
-# -- Model loading --------------------------------------------------------
 MODELS = {}
 
 
@@ -70,7 +68,6 @@ app = FastAPI(
 )
 
 
-# -- Helpers --------------------------------------------------------------
 def to_dataframe(inp: StudentInput) -> pd.DataFrame:
     row = inp.model_dump()
     row["academic_score"] = (row["cgpa"]*10 + row["tenth_percentage"] + row["twelfth_percentage"]) / 3
@@ -80,7 +77,6 @@ def to_dataframe(inp: StudentInput) -> pd.DataFrame:
     return pd.DataFrame([row])
 
 
-# -- Endpoints ------------------------------------------------------------
 @app.get("/", tags=["health"])
 def root():
     return {"message": "UTS MODEP API is running", "docs": "/docs"}

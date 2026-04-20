@@ -2,30 +2,32 @@
 import mlflow
 import mlflow.sklearn
 from sklearn.pipeline import Pipeline
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.linear_model import LogisticRegression
 
 from preprocessing import build_preprocessor
 
 
 def train_classifier(x_train, y_train):
-    n_estimators = 200
-    max_depth    = None
+    C = 0.1
+    solver = "lbfgs"
+    max_iter = 500
 
     pipe = Pipeline([
         ("prep", build_preprocessor()),
-        ("model", RandomForestClassifier(
-            n_estimators=n_estimators, max_depth=max_depth,
-            class_weight="balanced", random_state=42, n_jobs=-1,
+        ("model", LogisticRegression(
+            C=C, solver=solver, max_iter=max_iter,
+            class_weight="balanced", random_state=42,
         )),
     ])
 
     mlflow.set_tracking_uri("sqlite:///mlflow.db")
     mlflow.set_experiment("Placement Classification")
 
-    with mlflow.start_run(run_name="rf_classifier") as run:
-        mlflow.log_param("model", "RandomForestClassifier")
-        mlflow.log_param("n_estimators", n_estimators)
-        mlflow.log_param("max_depth", str(max_depth))
+    with mlflow.start_run(run_name="logreg_classifier") as run:
+        mlflow.log_param("model", "LogisticRegression")
+        mlflow.log_param("C", C)
+        mlflow.log_param("solver", solver)
+        mlflow.log_param("max_iter", max_iter)
         mlflow.log_param("class_weight", "balanced")
 
         pipe.fit(x_train, y_train)

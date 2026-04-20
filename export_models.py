@@ -20,7 +20,6 @@ def export():
     }
 
     for name, out in targets.items():
-        # Load model dari registry lalu copy file .pkl-nya
         model_uri = f"models:/{name}/latest"
         local_dir = mlflow.artifacts.download_artifacts(model_uri)
         src_pkl   = os.path.join(local_dir, "model.pkl")

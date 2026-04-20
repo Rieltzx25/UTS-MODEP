@@ -26,7 +26,6 @@ def build_input_df(form_values):
     return pd.DataFrame([row])
 
 
-# -- Sidebar --------------------------------------------------------------
 with st.sidebar:
     st.title("🎓 Placement Predictor")
     st.markdown(
@@ -36,7 +35,7 @@ with st.sidebar:
     st.markdown("---")
     st.subheader("Model Info")
     st.markdown(
-        "- **Classifier:** Random Forest  \n"
+        "- **Classifier:** Logistic Regression  \n"
         "- **Regressor:** Ridge Regression  \n"
         "- **Training:** via MLflow Pipeline  \n"
         "- **Fitur input:** 15 (hasil seleksi permutation importance)"
@@ -46,7 +45,6 @@ with st.sidebar:
     st.caption("[GitHub Repo](https://github.com/Rieltzx25/UTS-MODEP)")
 
 
-# -- Main -----------------------------------------------------------------
 st.title("Placement & Salary Predictor")
 st.markdown(
     "Isi form di bawah, lalu klik **Predict**. Regresi gaji hanya dijalankan jika "

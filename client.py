@@ -10,7 +10,6 @@ import streamlit as st
 st.set_page_config(page_title="Placement Predictor (API client)", page_icon="🎓", layout="wide")
 
 
-# -- Sidebar --------------------------------------------------------------
 with st.sidebar:
     st.title("🎓 Placement Predictor")
     st.caption("Frontend Streamlit — decoupled via FastAPI")
@@ -34,7 +33,6 @@ with st.sidebar:
     st.caption("[GitHub Repo](https://github.com/Rieltzx25/UTS-MODEP)")
 
 
-# -- Main -----------------------------------------------------------------
 st.title("Placement & Salary Predictor — API Client")
 st.markdown(
     "Form ini **tidak load model langsung**. Saat kamu klik Predict, request dikirim "

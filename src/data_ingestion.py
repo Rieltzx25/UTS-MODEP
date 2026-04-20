@@ -8,7 +8,6 @@ def load_data():
 
     df = features.merge(targets, on="Student_ID").drop(columns=["Student_ID"])
 
-    # Feature engineering (sama dengan Part 1)
     df["academic_score"] = (df["cgpa"]*10 + df["tenth_percentage"] + df["twelfth_percentage"]) / 3
     df["skill_avg"]      = (df["coding_skill_rating"]
                             + df["communication_skill_rating"]
