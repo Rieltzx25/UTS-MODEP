@@ -6,19 +6,16 @@ from sklearn.impute import SimpleImputer
 
 
 NUM_FEATURES = [
-    "cgpa", "tenth_percentage", "twelfth_percentage",
-    "backlogs", "study_hours_per_day", "attendance_percentage",
+    "cgpa", "tenth_percentage", "twelfth_percentage", "backlogs",
     "projects_completed", "internships_completed",
     "coding_skill_rating", "communication_skill_rating", "aptitude_skill_rating",
     "hackathons_participated", "certifications_count",
-    "sleep_hours", "stress_level",
+    "stress_level",
     "academic_score", "skill_avg",
 ]
 
 CAT_FEATURES = [
-    "gender", "branch", "part_time_job",
-    "family_income_level", "city_tier",
-    "internet_access", "extracurricular_involvement",
+    "branch", "city_tier", "extracurricular_involvement",
 ]
 
 

@@ -15,14 +15,10 @@ from pydantic import BaseModel, Field
 
 # -- Schemas --------------------------------------------------------------
 class StudentInput(BaseModel):
-    gender: str = Field(..., examples=["Male"])
-    branch: str = Field(..., examples=["CSE"])
     cgpa: float = Field(..., ge=0.0, le=10.0, examples=[8.5])
     tenth_percentage: float = Field(..., ge=0.0, le=100.0, examples=[85.0])
     twelfth_percentage: float = Field(..., ge=0.0, le=100.0, examples=[88.0])
     backlogs: int = Field(..., ge=0, examples=[0])
-    study_hours_per_day: float = Field(..., ge=0.0, le=24.0, examples=[5.0])
-    attendance_percentage: float = Field(..., ge=0.0, le=100.0, examples=[85.0])
     projects_completed: int = Field(..., ge=0, examples=[6])
     internships_completed: int = Field(..., ge=0, examples=[2])
     coding_skill_rating: int = Field(..., ge=1, le=5, examples=[4])
@@ -30,12 +26,9 @@ class StudentInput(BaseModel):
     aptitude_skill_rating: int = Field(..., ge=1, le=5, examples=[4])
     hackathons_participated: int = Field(..., ge=0, examples=[3])
     certifications_count: int = Field(..., ge=0, examples=[4])
-    sleep_hours: float = Field(..., ge=0.0, le=24.0, examples=[7.0])
     stress_level: int = Field(..., ge=1, le=10, examples=[5])
-    part_time_job: str = Field(..., examples=["No"])
-    family_income_level: str = Field(..., examples=["Medium"])
+    branch: str = Field(..., examples=["CSE"])
     city_tier: str = Field(..., examples=["Tier 2"])
-    internet_access: str = Field(..., examples=["Yes"])
     extracurricular_involvement: str = Field(..., examples=["Medium"])
 
 

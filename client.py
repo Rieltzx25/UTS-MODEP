@@ -42,17 +42,16 @@ st.markdown(
 )
 
 with st.form("prediction_form"):
-    st.subheader("Demografi & Akademik")
+    st.subheader("Akademik")
     c1, c2, c3 = st.columns(3)
     with c1:
-        gender = st.selectbox("Gender", ["Male", "Female"])
+        cgpa   = st.slider("CGPA", 5.0, 10.0, 8.3, 0.1)
         branch = st.selectbox("Branch", ["CSE", "IT", "ECE", "CE", "ME"])
     with c2:
-        cgpa = st.slider("CGPA", 5.0, 10.0, 8.3, 0.1)
-        tenth = st.slider("10th %", 50.0, 100.0, 74.7, 0.1)
+        tenth    = st.slider("10th %", 50.0, 100.0, 74.7, 0.1)
+        backlogs = st.number_input("Backlogs", 0, 10, 0)
     with c3:
         twelfth = st.slider("12th %", 50.0, 100.0, 74.8, 0.1)
-        backlogs = st.number_input("Backlogs", 0, 10, 0)
 
     st.subheader("Skills & Pengalaman")
     c1, c2, c3 = st.columns(3)
@@ -63,23 +62,17 @@ with st.form("prediction_form"):
     with c2:
         projects = st.number_input("Projects completed", 0, 20, 6)
         interns  = st.number_input("Internships completed", 0, 10, 2)
-        hacks    = st.number_input("Hackathons participated", 0, 10, 4)
     with c3:
-        certs  = st.number_input("Certifications", 0, 20, 3)
-        attend = st.slider("Attendance %", 40.0, 100.0, 72.0, 0.1)
-        study  = st.slider("Study hours/day", 0.0, 12.0, 4.0, 0.5)
+        hacks = st.number_input("Hackathons participated", 0, 10, 4)
+        certs = st.number_input("Certifications", 0, 20, 3)
 
-    st.subheader("Gaya Hidup & Latar Belakang")
+    st.subheader("Lainnya")
     c1, c2, c3 = st.columns(3)
     with c1:
-        sleep  = st.slider("Sleep hours", 3.0, 10.0, 7.0, 0.5)
         stress = st.slider("Stress level (1–10)", 1, 10, 6)
     with c2:
-        ptj    = st.selectbox("Part-time job", ["No", "Yes"])
-        income = st.selectbox("Family income", ["Low", "Medium", "High"])
-        tier   = st.selectbox("City tier", ["Tier 1", "Tier 2", "Tier 3"])
+        tier = st.selectbox("City tier", ["Tier 1", "Tier 2", "Tier 3"])
     with c3:
-        net   = st.selectbox("Internet access", ["Yes", "No"])
         extra = st.selectbox("Extracurricular", ["Low", "Medium", "High", "Unknown"])
 
     submitted = st.form_submit_button("🔮 Predict via API", use_container_width=True)
@@ -87,17 +80,14 @@ with st.form("prediction_form"):
 
 if submitted:
     payload = {
-        "gender": gender, "branch": branch,
         "cgpa": cgpa, "tenth_percentage": tenth, "twelfth_percentage": twelfth,
-        "backlogs": backlogs, "study_hours_per_day": study,
-        "attendance_percentage": attend,
+        "backlogs": backlogs,
         "projects_completed": projects, "internships_completed": interns,
         "coding_skill_rating": coding, "communication_skill_rating": comm,
         "aptitude_skill_rating": apt,
         "hackathons_participated": hacks, "certifications_count": certs,
-        "sleep_hours": sleep, "stress_level": stress,
-        "part_time_job": ptj, "family_income_level": income,
-        "city_tier": tier, "internet_access": net,
+        "stress_level": stress,
+        "branch": branch, "city_tier": tier,
         "extracurricular_involvement": extra,
     }
 
