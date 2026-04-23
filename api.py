@@ -1,9 +1,3 @@
-"""
-Part 4 - FastAPI Backend
-API server untuk inference model klasifikasi & regresi.
-Jalankan: uvicorn api:app --reload --port 8000
-Swagger UI: http://localhost:8000/docs
-"""
 from contextlib import asynccontextmanager
 from typing import Optional
 
