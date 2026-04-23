@@ -1,7 +1,3 @@
-"""
-Part 3 - Monolithic Streamlit App
-Load model .pkl, render form, prediksi placement + salary.
-"""
 import joblib
 import pandas as pd
 import streamlit as st
