@@ -1,10 +1,3 @@
-"""
-Extract model .pkl dari MLflow registry ke folder models/.
-Dijalankan setelah `python src/main.py` selesai.
-
-Alasan: Streamlit Cloud tidak punya akses ke MLflow registry lokal,
-jadi kita copy model ke folder biasa yang ikut ter-commit ke GitHub.
-"""
 import os
 import shutil
 import mlflow.sklearn
