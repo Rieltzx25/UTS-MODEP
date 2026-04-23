@@ -1,7 +1,3 @@
-"""
-Part 2 - Pipeline Runner (sklearn Pipeline + MLflow)
-"""
-
 from sklearn.model_selection import train_test_split
 
 from data_ingestion import load_data
