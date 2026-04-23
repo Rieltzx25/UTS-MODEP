@@ -1,8 +1,3 @@
-"""
-Part 4 - Streamlit Frontend (client)
-Form input, kirim request ke FastAPI backend, tampilkan hasilnya.
-Jalankan: streamlit run client.py
-"""
 import requests
 import streamlit as st
 
