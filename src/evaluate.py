@@ -1,4 +1,3 @@
-"""Load model dari MLflow run dan evaluate di test set."""
 import numpy as np
 import mlflow
 import mlflow.sklearn
