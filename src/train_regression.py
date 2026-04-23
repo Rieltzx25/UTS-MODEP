@@ -1,4 +1,3 @@
-"""Train regressor Pipeline, log ke MLflow."""
 import mlflow
 import mlflow.sklearn
 from sklearn.pipeline import Pipeline
